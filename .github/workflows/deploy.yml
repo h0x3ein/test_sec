@@ -1,9 +1,5 @@
 name: Security Check
 
-on: [push, pull_request]
-
-jobs:name: Security Check
-
 on: push
 
 jobs:
