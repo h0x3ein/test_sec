@@ -1,10 +1,24 @@
 name: Example workflow for Node using Snyk
 on: push
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: npm-deps-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
   security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+      - name: Install dependencies
+        run: npm ci
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
         continue-on-error: true # To make sure that SARIF upload gets called
