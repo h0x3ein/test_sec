@@ -1,12 +1,22 @@
-name: Example workflow for Node using Snyk
-on: push
+name: Snyk Scan
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  security:
+  snyk_scan:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Snyk Security Scan
         uses: snyk/actions/node@master
-        continue-on-error: true 
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
