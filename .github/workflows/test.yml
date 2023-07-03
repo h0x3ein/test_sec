@@ -28,5 +28,5 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.organization=sec-test
-            -Dsonar.projectKey=sec-test_sec-test
+            -Dsonar.organization=nobi
+            -Dsonar.projectKey=nobi_nobi
