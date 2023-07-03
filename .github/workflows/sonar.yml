@@ -1,6 +1,6 @@
 name: CI/CD with SonarQube
 
-on: [push, pull_request]
+on: push
 
 jobs:
   build:
