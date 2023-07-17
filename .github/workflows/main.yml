@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
   workflow_run:
     workflows: ["My Workflow"]
     types:
@@ -13,21 +14,19 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: print test
-        run : echo "Run Test Job automatically"
-     
-
+      - name: Run test
+        run: echo "Run test job automatically"
   build:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: print build
-        run : echo "Run Build Job automatically"
+     - name: Run build
+       run: echo "Run build job automatically"
 
   deploy:
     needs: build
-    if: github.event_name == 'workflow_run'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run'
     runs-on: ubuntu-latest
     steps:
-      - name: print test
-        run : echo "Run Deploy Job manually"
+     - name: Run Deploy
+       run: echo "Run Deploy job automatically"
