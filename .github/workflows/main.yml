@@ -1,0 +1,33 @@
+name: My Workflow
+
+on:
+  push:
+    branches:
+      - main
+  workflow_run:
+    workflows: ["My Workflow"]
+    types:
+      - completed
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print test
+        run : echo "Run Test Job automatically"
+     
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: print build
+        run : echo "Run Build Job automatically"
+
+  deploy:
+    needs: build
+    if: github.event_name == 'workflow_run'
+    runs-on: ubuntu-latest
+    steps:
+      - name: print test
+        run : echo "Run Deploy Job manually"
